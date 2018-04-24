@@ -1,4 +1,4 @@
-package com.example.twcn.servicelifecycledojo;
+package com.dojo.sunny.servicelifecycledojo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
