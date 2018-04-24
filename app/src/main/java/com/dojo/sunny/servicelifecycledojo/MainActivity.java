@@ -1,4 +1,4 @@
-package com.example.twcn.myapplication;
+package com.example.twcn.servicelifecycledojo;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.twcn.myapplication.R;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 

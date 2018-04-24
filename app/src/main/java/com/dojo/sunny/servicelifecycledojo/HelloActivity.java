@@ -1,7 +1,9 @@
-package com.example.twcn.myapplication;
+package com.example.twcn.servicelifecycledojo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.twcn.myapplication.R;
 
 public class HelloActivity extends AppCompatActivity {
 

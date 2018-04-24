@@ -1,4 +1,4 @@
-package com.example.twcn.myapplication;
+package com.example.twcn.servicelifecycledojo;
 
 import android.app.Service;
 import android.content.Intent;
