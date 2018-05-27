@@ -1,11 +1,11 @@
 package com.dojo.sunny.activity;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +13,21 @@ import android.widget.Button;
 import com.dojo.sunny.R;
 import com.dojo.sunny.service.LogService;
 
-public class MainActivity extends Activity implements Button.OnClickListener {
+public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
     public static final String TAG = "LogService";
+
+    ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e(TAG, ": on service connected");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.e(TAG, ": on service disconnected");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +58,8 @@ public class MainActivity extends Activity implements Button.OnClickListener {
                 break;
             case R.id.bind_service:
                 Intent bindIntent = new Intent(this, LogService.class);
-//                bindService(bindIntent, connection, BIND_AUTO_CREATE);
-                bindService(bindIntent, connection, BIND_ABOVE_CLIENT);
+                bindService(bindIntent, connection, BIND_AUTO_CREATE);
+//                bindService(bindIntent, connection, BIND_ABOVE_CLIENT);
                 break;
             case R.id.unbind_service:
                 unbindService(connection);
@@ -65,16 +77,4 @@ public class MainActivity extends Activity implements Button.OnClickListener {
                 break;
         }
     }
-
-    ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.e(TAG, ": on service connected");
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Log.e(TAG, ": on service disconnected");
-        }
-    };
 }
