@@ -1,7 +1,10 @@
-package com.dojo.sunny.servicelifecycledojo;
+package com.dojo.sunny.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.dojo.sunny.R;
+
 
 public class HelloActivity extends Activity {
 

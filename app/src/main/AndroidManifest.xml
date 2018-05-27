@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dojo.sunny.servicelifecycledojo">
+    package="com.dojo.sunny">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.dojo.sunny.servicelifecycledojo.MainActivity">
+        <activity android:name="com.dojo.sunny.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,9 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.dojo.sunny.servicelifecycledojo.HelloActivity" />
+        <activity android:name="com.dojo.sunny.activity.HelloActivity" />
 
-        <service android:name="com.dojo.sunny.servicelifecycledojo.LogService" />
+        <service android:name="com.dojo.sunny.service.LogService" />
     </application>
 
 </manifest>

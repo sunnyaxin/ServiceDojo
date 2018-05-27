@@ -1,4 +1,4 @@
-package com.dojo.sunny.servicelifecycledojo;
+package com.dojo.sunny.activity;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -9,6 +9,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.dojo.sunny.R;
+import com.dojo.sunny.service.LogService;
 
 public class MainActivity extends Activity implements Button.OnClickListener {
 

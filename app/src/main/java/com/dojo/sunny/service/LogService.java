@@ -1,4 +1,4 @@
-package com.dojo.sunny.servicelifecycledojo;
+package com.dojo.sunny.service;
 
 import android.app.Service;
 import android.content.Intent;
