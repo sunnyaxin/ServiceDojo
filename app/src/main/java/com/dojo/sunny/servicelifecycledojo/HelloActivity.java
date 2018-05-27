@@ -1,11 +1,9 @@
 package com.dojo.sunny.servicelifecycledojo;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.example.twcn.myapplication.R;
-
-public class HelloActivity extends AppCompatActivity {
+public class HelloActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
