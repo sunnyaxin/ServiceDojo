@@ -17,9 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.dojo.sunny.activity.HelloActivity" />
-
-        <service android:name="com.dojo.sunny.service.LogService" />
+        <service android:name=".service.LocalService"/>
     </application>
 
 </manifest>

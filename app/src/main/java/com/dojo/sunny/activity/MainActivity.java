@@ -6,75 +6,75 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
+import android.widget.Toast;
 import com.dojo.sunny.R;
-import com.dojo.sunny.service.LogService;
+import com.dojo.sunny.service.LocalService;
 
 public class MainActivity extends Activity implements Button.OnClickListener {
 
-    public static final String TAG = "LogService";
+    private boolean bound = false;
+
+    private TextView question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button start = findViewById(R.id.start_service);
         Button bind = findViewById(R.id.bind_service);
         Button unbind = findViewById(R.id.unbind_service);
-        Button stop = findViewById(R.id.stop_service);
-        Button jump = findViewById(R.id.jump_next_page);
+        question = findViewById(R.id.question);
 
-        start.setOnClickListener(this);
         bind.setOnClickListener(this);
         unbind.setOnClickListener(this);
-        stop.setOnClickListener(this);
-        jump.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (bound) {
+            unbindService(connection);
+        }
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.start_service:
-                Intent startIntent = new Intent(this, LogService.class);
-                startIntent.putExtra("service_string", "start_service_string");
-                startService(startIntent);
-                break;
             case R.id.bind_service:
-                Intent bindIntent = new Intent(this, LogService.class);
-//                bindService(bindIntent, connection, BIND_AUTO_CREATE);
-                bindService(bindIntent, connection, BIND_ABOVE_CLIENT);
+                Intent bindIntent = new Intent(MainActivity.this, LocalService.class);
+                bindService(bindIntent, connection, BIND_AUTO_CREATE);
                 break;
             case R.id.unbind_service:
-                unbindService(connection);
-                break;
-            case R.id.stop_service:
-                Intent stopIntent = new Intent(this, LogService.class);
-                stopService(stopIntent);
-                break;
-            case R.id.jump_next_page:
-                Intent intent = new Intent(this, HelloActivity.class);
-                intent.putExtra("fromMain", true);
-                startActivity(intent);
+                if (bound) {
+                    unbindService(connection);
+                    question.setText("what's your name?");
+                } else {
+                    Toast.makeText(MainActivity.this, "service not bind", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 break;
         }
     }
 
-    ServiceConnection connection = new ServiceConnection() {
+    private ServiceConnection connection = new ServiceConnection() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.e(TAG, ": on service connected");
+        public void onServiceConnected(ComponentName name, IBinder iBinder) {
+            bound = true;
+            LocalService.LocalBinder binder = (LocalService.LocalBinder) iBinder;
+            LocalService localService = binder.getService();
+            Toast.makeText(MainActivity.this, "bind service", Toast.LENGTH_SHORT).show();
+            question.setText(localService.answerName());
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.e(TAG, ": on service disconnected");
+            bound = false;
+            Toast.makeText(MainActivity.this, "unbind service", Toast.LENGTH_SHORT).show();
         }
     };
 }
