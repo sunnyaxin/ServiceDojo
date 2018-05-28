@@ -47,11 +47,13 @@ public class MainActivity extends Activity implements Button.OnClickListener {
             case R.id.bind_service:
                 Intent bindIntent = new Intent(MainActivity.this, LocalService.class);
                 bindService(bindIntent, connection, BIND_AUTO_CREATE);
+                Toast.makeText(MainActivity.this, "bind service", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.unbind_service:
                 if (bound) {
                     unbindService(connection);
                     question.setText("what's your name?");
+                    Toast.makeText(MainActivity.this, "unbind service", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "service not bind", Toast.LENGTH_SHORT).show();
                 }
@@ -67,14 +69,14 @@ public class MainActivity extends Activity implements Button.OnClickListener {
             bound = true;
             LocalService.LocalBinder binder = (LocalService.LocalBinder) iBinder;
             LocalService localService = binder.getService();
-            Toast.makeText(MainActivity.this, "bind service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "connect service", Toast.LENGTH_SHORT).show();
             question.setText(localService.answerName());
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             bound = false;
-            Toast.makeText(MainActivity.this, "unbind service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "disconnect service", Toast.LENGTH_SHORT).show();
         }
     };
 }
