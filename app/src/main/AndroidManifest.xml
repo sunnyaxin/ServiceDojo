@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.LocalService"/>
+        <service android:name=".service.MessengerService"/>
     </application>
 
 </manifest>
